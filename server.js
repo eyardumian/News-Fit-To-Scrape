@@ -5,9 +5,10 @@ var logger = require("morgan");
 var mongoose = require("mongoose");
 var axios = require("axios");
 var cheerio = require("cheerio");
+var request = require("request");
 
 // Require all models
-var db = require("/.models");
+var db = require("./models");
 
 // Specify port number
 var PORT = 3000;
@@ -26,22 +27,22 @@ app.use(express.static("public"));
 
 // Connect to the Mongo DB
 mongoose.Promise = Promise;
-mongoose.connect("mongodb://localhost/newsSraper", {
+mongoose.connect("mongodb://localhost/newsScraper", {
   useMongoClient: true
 });
 
 // Routes
 
-// Get rout for scraping all the news
+// Get route for scraping all the news
 app.get("/scrape", function(req, res) {
   // Grab the html body
-  axios.get("https://www.reddit.com/").then(function(response) {
+  axios.get("https://www.cnn.com/").then(function(response) {
     // Save the html to $
     var $ = cheerio.load(response.data);
     // Grab every <p> with a class of title
-    $("p.title").each(function(i, element) {
+    $("h3.cd__headline").each(function(i, element) {
       // Save an empty result object
-      var result = {};
+    var result = {};
 
       // Add the text and href of each link, and save them as properties of the result object
       result.title = $(this)
@@ -56,7 +57,7 @@ app.get("/scrape", function(req, res) {
         .create(result)
         .then(function(dbArticle) {
           // Send a message to client upon successful scraping
-          res.send("Scrape Complete");
+          //res.send("Scrape Complete");
         })
         .catch(function(err) {
           res.json(err);
@@ -66,8 +67,52 @@ app.get("/scrape", function(req, res) {
 });
 
 // Route for getting all Articles from the db
+app.get("/articles", function(req, res) {
+  console.log("fired from server");
+  db.Article.find({})
+  .then(function(dbArticle) {
+    res.json(dbArticle);
+  })
+  .catch(function(err) {
+    res.json(err);
+  });
+});
 
-// Route for grabbing a specific Article by id, 
+// Route for grabbing a specific Article by id, populate it with it's Note
+app.get("/articles/:id", function(req, res) {
+  db.Article.findOne({ _id: req.params.id })
+  .populate("note")
+  .then(function(dbArticle) {
+    res.json(dbArticle);
+  })
+  .catch(function(err) {
+    res.json(err);
+  });
+});
+
+//Route for saving an Article's note
+app.post("/articles/:id", function(req, res) {
+  db.Note
+    .create(req.body)
+    .then(function(dbNote) {
+      return db.Article.findOneAndUpdate({ _id: req.params.id }, { note: dbNote._id}, { new: true });
+    })
+    .then(function(dbArticle) {
+        res.json(dbArticle);
+      })
+      .catch(function(err) {
+        res.json(err);
+      });
+    });
+
+// Route for deleting an Article
+
+app.delete("/articles/:id", function (req, res) {
+  db.Article.deleteOne({"_id": req.params.id});
+}).catch(function(err) {
+  res.json(err);
+});
+});
 
 
 // Start the server

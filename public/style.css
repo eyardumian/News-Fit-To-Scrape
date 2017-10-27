@@ -1,0 +1,57 @@
+#articles {
+    display: inline-block;
+    overflow: auto;
+    width: 60%;
+    height: 700px;
+    padding-left: 25px;
+    font-family: 'Cinzel', serif;
+    }
+
+#notes {
+    float: right;
+    width: 30%;
+    padding-right: 20px;
+    font-family: 'Cinzel', serif;
+    }
+
+textarea, input {
+    display: block;
+    width: 100%;
+    background-color: #DBC9AC;
+    }
+
+input {
+    height: 36px;
+    font-size: 24px;
+    }
+
+textarea {
+    height: 200px;
+    font-size: 18px;
+    }
+
+#header {
+    background: #CCB494;
+}
+
+.dropdown-item {
+  color: black;
+  font-family: 'Cinzel', serif;
+}
+
+#main {
+    background-image: url("images/pexels-photo-97050.jpeg");
+    background-size: cover;
+    height: 500px;
+    font-size: 75px;
+    font-family: 'Cinzel', serif;
+  }
+
+#main {
+  background-color: #fff5e6;
+}
+
+#footer {
+   background: #CCB494;
+   text-align: center;
+  }

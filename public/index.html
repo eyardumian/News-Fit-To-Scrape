@@ -2,6 +2,8 @@
 <html>
   <head>
     <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link href="https://fonts.googleapis.com/css?family=Cinzel|Crete+Round|Indie+Flower|Patua+One" rel="stylesheet">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -10,21 +12,26 @@
   <body>
 
     <div class="panel panel-default">
-        <div class="panel-heading">
-          <div class = "row">
-             <h2 id = "title"><strong>Reddit Scraper</strong></h2>
-             <a href = "/" id = "homeButton"> Home </a>
-             <a href = "/saved" id = "savedButton"> Saved Articles </a>
-             <button type = "submit" class = "btn btn-primary" id = "submit">Scrape New Articles!</button>
+        <div class="panel-heading" id = "header">
+            <div class="dropdown">
+              <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span>
+              </button>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <a class="dropdown-item" href="/">Home</a>
+                <br>
+                <a class="dropdown-item" href="/scrape">Scrape New Articles</a>
+                <!-- <a class="dropdown-item" href="#">Saved Articles</a> -->
+              </div>
+            </div>
           </div>
         </div>
-      <div class="panel-body">Panel Content</div>
-    </div>
+      <div class="panel-body" id = "main">Reddit Scraper</div>
+      <div id = "articles"></div>
+      <div id = "notes"></div>
 
-    <div id = "articles"></div>
-
-    <div class="panel panel-default">
-      <div class="panel-body"> © 2017 Erika Yardumian </div>
-    </div>
+    <div class="panel panel-default" id = "footer">  © 2017 Erika Yardumian </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="app.js"></script>
   </body>
 </html>
