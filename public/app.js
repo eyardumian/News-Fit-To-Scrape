@@ -9,8 +9,7 @@ $.getJSON("/articles", function(data) {
 $("#articles").append("<div class='panel panel-default'><div class='panel-heading'> <p data-id='" + data[i]._id + "'>" + data[i].title + "</p></div>" + "<div class='panel-body'><a href='" + data[i].link + "'>Link to Article</p>");  }
 });
 
-// onclick event to delete an article
-//$(document).on("click", "")
+
 
 $(document).on("click", "p", function() {
   // Empty the notes
@@ -72,4 +71,17 @@ $(document).on("click", "#savenote", function() {
   // Remove the values entered in the input and textarea for note entry
   $("#titleinput").val("");
   $("#bodyinput").val("");
+});
+
+// onclick event to delete an article
+$(document).on("click", "#deletenote", function() {
+  var thisId = $(this).attr("data-id");
+  $.ajax({
+    method: "DELETE",
+    url: "/delete/" + thisId
+  }).done(function(data) {
+    $("#notes").empty();
+  });
+  $("#titleinput").val("");
+  $("bodyinput").val("");
 });
