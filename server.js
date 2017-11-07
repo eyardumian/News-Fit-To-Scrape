@@ -36,17 +36,22 @@ mongoose.connect("mongodb://localhost/newsScraper", {
 // Get route for scraping all the news
 app.get("/scrape", function(req, res) {
   // Grab the html body
-  axios.get("https://www.cnn.com/").then(function(response) {
+  axios.get("http://www.ocregister.com").then(function(response) {
+  // request("http://www.ocregister.com", function(error, response, html) {
+
     // Save the html to $
-    var $ = cheerio.load(response.data);
+    var $ = cheerio.load(response);
     // Grab every <p> with a class of title
-    $("h3.cd__headline").each(function(i, element) {
+    // $("h3.cd__headline").each(function(i, element) {
+    $("h5.entry-title").each(function(i, element) {
+
       // Save an empty result object
     var result = {};
 
       // Add the text and href of each link, and save them as properties of the result object
       result.title = $(this)
         .children("a")
+
         .text();
       result.link = $(this)
         .children("a")
@@ -64,6 +69,7 @@ app.get("/scrape", function(req, res) {
         });
     });
   });
+  res.redirect("/");
 });
 
 // Route for getting all Articles from the db
@@ -107,12 +113,11 @@ app.post("/articles/:id", function(req, res) {
 
 // Route for deleting an Article
 
-app.delete("/delete/:id", function (req, res) {
-  db.Article.deleteOne({"_id": req.params.id});
-}).catch(function(err) {
-  res.json(err);
-});
-});
+// app.delete("/delete/:id", function (req, res) {
+//   db.Article.deleteOne({"_id": req.params.id});
+// }).catch(function(err) {
+//   res.json(err);
+// });
 
 
 // Start the server
