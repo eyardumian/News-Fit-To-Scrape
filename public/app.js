@@ -1,10 +1,12 @@
 // Grab the articles as json
 $.getJSON("/articles", function(data) {
   for (var i = 0; i < data.length; i++) {
-     $("#articles").append("<p data-id='" + data[i]._id + "'>" + data[i].title + "<br />" + data[i].link + "</p>");
-    // $("#articles").append("<p class = 'panel-heading' data-id='" + data[i]._id + "'>" + data[i].title + "<br />" + "</p>" );
-    // $("#articles").append("<p class = 'panel-body' + data[i].link </p>");
-  }
+    // var title = data[i].title;
+    // var link = data[i].link;
+    // $("#title").append("<h3> data-id='" + data[i]._id + "'>" + data[i].title + "</h3>");
+    // $("#link").append(" data-id=' " + data[i]._id + "'>" + data[i].link)
+    //  $("#articles").append("<p data-id='" + data[i]._id + "'>" + data[i].title + "<br />" + data[i].link + "</p>");
+$("#articles").append("<div class='panel panel-default'><div class='panel-heading'> <p data-id='" + data[i]._id + "'>" + data[i].title + "</p></div>" + "<div class='panel-body'><a href='" + data[i].link + "'>Link to Article</p>");  }
 });
 
 // onclick event to delete an article
@@ -25,7 +27,7 @@ $(document).on("click", "p", function() {
     .done(function(data) {
       console.log(data);
       // The title of the article
-      $("#notes").append("<h2>" + data.title + "</h2>");
+      $("#notes").append("<div id='noteTitle' >" + data.title + "</div>");
       // An input to enter a new title
       //$("#notes").append("<input id='titleinput' name='title' >");
       // A textarea to add a new note body

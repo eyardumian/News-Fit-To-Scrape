@@ -107,12 +107,12 @@ app.post("/articles/:id", function(req, res) {
 
 // Route for deleting an Article
 
-app.delete("/articles/:id", function (req, res) {
-  db.Article.deleteOne({"_id": req.params.id});
-}).catch(function(err) {
-  res.json(err);
-});
-});
+// app.delete("/articles/:id", function (req, res) {
+//   db.Article.deleteOne({"_id": req.params.id});
+// }).catch(function(err) {
+//   res.json(err);
+// });
+// });
 
 
 // Start the server

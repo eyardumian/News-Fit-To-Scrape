@@ -8,6 +8,7 @@ var NoteSchema = new Schema({
 
   body: {
     type: String
+  }
 });
 
 // Create a model form the above schema, using mongoose's model method
