@@ -27,8 +27,8 @@ app.use(express.static("public"));
 
 // Connect to the Mongo DB
 mongoose.Promise = Promise;
-// mongoose.connect("mongodb://localhost/newsScraper", {
-mongoose.connect("https://news-scrape-07.herokuapp.com/", {
+mongoose.connect("mongodb://localhost/newsScraper", {
+// mongoose.connect("https://news-scrape-07.herokuapp.com/", {
 
   useMongoClient: true
 });
@@ -113,12 +113,26 @@ app.post("/articles/:id", function(req, res) {
       });
     });
 
+
 // Route for deleting an Article
 
 app.delete("/delete/:id", function (req, res) {
-  db.Article.deleteOne({"_id": req.params.id});
-}).catch(function(err) {
-  res.json(err);
+//   db.Article.deleteOne({"_id": req.params.id});
+// }).catch(function(err) {
+//   res.json(err);
+// });
+db.notes.remove({
+  "_id": mongojs.ObjectID(req.params.id)
+}, function(error, removed) {
+  if (error) {
+    console.log(error);
+    res.send(error);
+   }
+   else {
+     console.log(removed);
+     res.send(removed);
+   }
+ });
 });
 
 

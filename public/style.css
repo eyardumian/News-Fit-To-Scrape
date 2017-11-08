@@ -18,6 +18,10 @@
   font-size: 20px;
 }
 
+.panel-heading {
+  background-color: #DBC9AC;
+}
+
 textarea, input {
     display: block;
     width: 100%;
