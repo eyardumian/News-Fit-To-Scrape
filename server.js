@@ -27,7 +27,9 @@ app.use(express.static("public"));
 
 // Connect to the Mongo DB
 mongoose.Promise = Promise;
-mongoose.connect("mongodb://localhost/newsScraper", {
+// mongoose.connect("mongodb://localhost/newsScraper", {
+mongoose.connect("https://news-scrape-07.herokuapp.com/", {
+
   useMongoClient: true
 });
 
@@ -36,7 +38,7 @@ mongoose.connect("mongodb://localhost/newsScraper", {
 // Get route for scraping all the news
 app.get("/scrape", function(req, res) {
   // Grab the html body
-  axios.get("http://www.ocregister.com").then(function(response) {
+  axios.get("https://www.ocregister.com").then(function(response) {
   // request("http://www.ocregister.com", function(error, response, html) {
 
     // Save the html to $
@@ -113,11 +115,11 @@ app.post("/articles/:id", function(req, res) {
 
 // Route for deleting an Article
 
-// app.delete("/delete/:id", function (req, res) {
-//   db.Article.deleteOne({"_id": req.params.id});
-// }).catch(function(err) {
-//   res.json(err);
-// });
+app.delete("/delete/:id", function (req, res) {
+  db.Article.deleteOne({"_id": req.params.id});
+}).catch(function(err) {
+  res.json(err);
+});
 
 
 // Start the server
