@@ -45,12 +45,11 @@ $(document).on("click", "p", function() {
       if (data.note) {
 
         // Place the title of the note in the title input
-        // $("#titleinput").val(data.note.title);
-        // Place the body of the note in the body textarea
-        // $("#bodyinput").val(data.note.body);
-
         $("#titleinput").val(data.note.title);
+        // Place the body of the note in the body textarea
         $("#bodyinput").val(data.note.body);
+
+
 
       }
     });
@@ -99,5 +98,5 @@ $(document).on("click", "#deletenote", function() {
     $("#notes").empty();
   });
   $("#titleinput").val("");
-  $("bodyinput").val("");
+  $("#bodyinput").val("");
 });

@@ -8,7 +8,10 @@ var cheerio = require("cheerio");
 var request = require("request");
 
 // Require all models
+// var Note = require("./models/Note.js");
+// var Article = require("./models/Article.js");
 var db = require("./models");
+
 
 // Specify port number
 var PORT = 3000;
@@ -27,6 +30,7 @@ app.use(express.static("public"));
 
 // Connect to the Mongo DB
 mongoose.Promise = Promise;
+// var db = mongoose.connection;
 mongoose.connect("mongodb://localhost/newsScraper", {
 // mongoose.connect("https://news-scrape-07.herokuapp.com/", {
 
